@@ -11,7 +11,7 @@ import java.util.Objects;
 public class PesquisaCandidato extends JFrame implements ActionListener {
 
     protected JPanel painel;
-    protected JLabel header;
+    protected JLabel header, info;
     protected JTextField estado, cidade, cursoArea;
     protected String state, city, carrearArea;
     protected JButton cadastrar, voltar;
@@ -88,6 +88,16 @@ public class PesquisaCandidato extends JFrame implements ActionListener {
         painel.add(cadastrar);
         cadastrar.addActionListener(this);
 
+        // Info da página
+        info = new JLabel();
+        info.setText("Para excluir ou alterar qualquer informação clique 2x no campo desejado.");
+        info.setForeground(Color.lightGray); // cor do texto
+        info.setFont(new Font(Font.SERIF, Font.BOLD, 16));
+        info.setHorizontalAlignment(JLabel.CENTER);
+        info.setBounds(0, 280, 800, 30);
+        info.setBorder(new EmptyBorder(10, 0, 0, 0)); // adicionando bordas
+        painel.add(info);
+
         // Tabela
         tabela = new JTable();
         tabela.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -97,6 +107,17 @@ public class PesquisaCandidato extends JFrame implements ActionListener {
         tabela.setBorder(new LineBorder(Color.black));
         tabela.setGridColor(Color.black);
         tabela.setShowGrid(true);
+        JPanel panelResultado = new JPanel();
+        panelResultado.setBackground(Color.DARK_GRAY);
+        panelResultado.setBounds(190, 221, 594, 239);
+        painel.add(panelResultado);
+
+        JScrollPane scroll = new JScrollPane();
+        scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scroll.setBounds(10, 11, 574, 217);
+        panelResultado.add(scroll);
+        scroll.setViewportView(tabela);
 
         // Tornando tudo visivel
         this.setVisible(true);
@@ -107,6 +128,8 @@ public class PesquisaCandidato extends JFrame implements ActionListener {
         cursoArea.setVisible(true);
         cadastrar.setVisible(true);
         voltar.setVisible(true);
+        tabela.setVisible(true);
+        info.setVisible(true);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
