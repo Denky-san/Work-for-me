@@ -6,13 +6,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
-public class Janela extends JFrame implements ActionListener {
+public class TelaInicial extends JFrame implements ActionListener {
 
     protected JButton cadastrarUniversidade, cadastrarCurso, cadastrarAluno, pesquisarCandidato;
     protected JPanel painel;
     protected JLabel header, footer;
 
-    Janela(){
+    TelaInicial(){
         // Criando objeto imagem
         ImageIcon icone = new ImageIcon("D:\\trabalhoFinal\\Work-for-me\\src\\Assets\\logo.png");
         this.setIconImage(icone.getImage()); // Tornando objeto imagem o icone
@@ -36,56 +36,56 @@ public class Janela extends JFrame implements ActionListener {
         header.setText("Work For Me");
         header.setIcon(icone);
         header.setForeground(Color.lightGray); // cor do texto
-        header.setFont(new Font("Unto",Font.BOLD, 40));
+        header.setFont(new Font(Font.SERIF,Font.BOLD, 40));
         header.setVerticalAlignment(JLabel.TOP);
         header.setHorizontalAlignment(JLabel.CENTER);
         header.setBounds(0,0,800,600);
         header.setBorder(new EmptyBorder(10,0,0,0)); // adicionando bordas
         painel.add(header);
 
-        //Botão para cadastrar universidade
+        // Botão para cadastrar universidade
         cadastrarUniversidade = new JButton("Cadastrar Universidade");
-        cadastrarUniversidade.setBounds(270,140,200,50);
+        cadastrarUniversidade.setBounds(300,140,200,50);
         cadastrarUniversidade.setFocusable(false); // tirar caixa pontilhada que ficava em volta da palavra dentro do botão
         painel.add(cadastrarUniversidade);
         cadastrarUniversidade.addActionListener(this);
 
-        //Botão para cadastrar curso
+        // Botão para cadastrar curso
         cadastrarCurso = new JButton("Cadastrar Curso");
-        cadastrarCurso.setBounds(270,240,200,50);
+        cadastrarCurso.setBounds(300,240,200,50);
         cadastrarCurso.setFocusable(false); // tirar caixa pontilhada que ficava em volta da palavra dentro do botão
         painel.add(cadastrarCurso);
         cadastrarCurso.addActionListener(this);
 
-        //Botão para cadastrar aluno
+        // Botão para cadastrar aluno
         cadastrarAluno = new JButton("Cadastrar Aluno");
-        cadastrarAluno.setBounds(270,340,200,50);
+        cadastrarAluno.setBounds(300,340,200,50);
         cadastrarAluno.setFocusable(false); // tirar caixa pontilhada que ficava em volta da palavra dentro do botão
         painel.add(cadastrarAluno);
         cadastrarAluno.addActionListener(this);
 
-        //Botão para pesquisar candidado
+        // Botão para pesquisar candidado
         ImageIcon lupa = new ImageIcon("D:\\trabalhoFinal\\Work-for-me\\src\\Assets\\lupa.png");
         pesquisarCandidato = new JButton("Pesquisar candidato");
         pesquisarCandidato.setIcon(lupa);
         pesquisarCandidato.setIconTextGap(10);
         pesquisarCandidato.setBackground(Color.gray);
-        pesquisarCandidato.setBounds(270,440,200,50);
+        pesquisarCandidato.setBounds(300,440,200,50);
         pesquisarCandidato.setFocusable(false); // tirar caixa pontilhada que ficava em volta da palavra dentro do botão
         painel.add(pesquisarCandidato);
         pesquisarCandidato.addActionListener(this);
 
-        //Footer
+        // Footer
         footer = new JLabel();
         footer.setText("Feito por © Pedro Junqueira e Matheus de Moura.");
         footer.setForeground(Color.lightGray); // cor do texto
-        footer.setFont(new Font("Unto",Font.BOLD, 12));
+        footer.setFont(new Font(Font.SERIF,Font.BOLD, 12));
         footer.setVerticalAlignment(JLabel.TOP);
         footer.setHorizontalAlignment(JLabel.CENTER);
-        footer.setBounds(270, 540, 280, 16);
+        footer.setBounds(257, 540, 280, 16);
         painel.add(footer);
 
-        //Tornando tudo visivel
+        // Tornando tudo visivel
         this.setVisible(true);
         painel.setVisible(true);
         header.setVisible(true);
@@ -96,16 +96,30 @@ public class Janela extends JFrame implements ActionListener {
         footer.setVisible(true);
     }
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (Objects.equals(e.getSource(),cadastrarUniversidade)){
+            CadastroUniversidade uni = new CadastroUniversidade();
+            uni.setVisible(true);
+            dispose();
+        }
 
-        /*
-            if (Objects.equals(e.getSource(), converter)) {
-            texto = input.getText();
-             texto = texto.toUpperCase();
-            }
-            */
+        if (Objects.equals(e.getSource(),cadastrarCurso)){
+            CadastroCurso cur = new CadastroCurso();
+            cur.setVisible(true);
+            dispose();
+        }
 
+        if (Objects.equals(e.getSource(),cadastrarAluno)){
+            CadastroAluno alu = new CadastroAluno();
+            alu.setVisible(true);
+            dispose();
+        }
+
+        if (Objects.equals(e.getSource(),pesquisarCandidato)){
+            PesquisaCandidato pes = new PesquisaCandidato();
+            pes.setVisible(true);
+            dispose();
+        }
     }
 }
