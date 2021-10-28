@@ -19,7 +19,7 @@ public class CadastroUniversidade extends JFrame implements ActionListener {
         ImageIcon icone = new ImageIcon("D:\\trabalhoFinal\\Work-for-me\\src\\Assets\\logo.png");
         this.setIconImage(icone.getImage()); // Tornando objeto imagem o icone
 
-        this.setBounds(0,0,800,600); //Definir tamanho da janela
+        this.setBounds(TelaInicial.boundx,TelaInicial.boundy,800,600); //Definir tamanho da janela
         this.setResizable(false); // Proibir redimensionamento
         this.setTitle("Work For Me"); //Nome da janela
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Para realmente fechar a aplicação
@@ -29,7 +29,7 @@ public class CadastroUniversidade extends JFrame implements ActionListener {
         // Painel
         painel = new JPanel();
         painel.setBackground(new Color(18, 18, 18));
-        painel.setBounds(0, 0, 800, 600); // metodo para escolher local do componente na tela
+        painel.setBounds(0,0,800,600); // metodo para escolher local do componente na tela
         getContentPane().add(painel);
         painel.setLayout(null);
 
@@ -120,12 +120,16 @@ public class CadastroUniversidade extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (Objects.equals(e.getSource(),voltar)){
+            TelaInicial.boundx = this.getX();
+            TelaInicial.boundy = this.getY();
             TelaInicial ini = new TelaInicial();
             ini.setVisible(true);
             dispose();
         }
 
         if (Objects.equals(e.getSource(),cadastrar)){
+            TelaInicial.boundx = this.getX();
+            TelaInicial.boundy = this.getY();
             name = nome.getText();
             address = endereco.getText();
             district = bairro.getText();

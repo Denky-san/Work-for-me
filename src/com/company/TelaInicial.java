@@ -8,6 +8,12 @@ import java.util.Objects;
 
 public class TelaInicial extends JFrame implements ActionListener {
 
+    static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    double width = screenSize.getWidth();
+    double height = screenSize.getHeight();
+
+    protected static int boundx = (screenSize.width / 2) - 400;
+    protected static int boundy = (screenSize.height / 2) - 300;
     protected JButton cadastrarUniversidade, cadastrarCurso, cadastrarAluno, pesquisarCandidato;
     protected JPanel painel;
     protected JLabel header, footer;
@@ -17,7 +23,8 @@ public class TelaInicial extends JFrame implements ActionListener {
         ImageIcon icone = new ImageIcon("D:\\trabalhoFinal\\Work-for-me\\src\\Assets\\logo.png");
         this.setIconImage(icone.getImage()); // Tornando objeto imagem o icone
 
-        this.setBounds(0,0,800,600); //Definir tamanho da janela
+
+        this.setBounds(boundx, boundy,800,600); //Definir tamanho da janela
         this.setResizable(false); // Proibir redimensionamento
         this.setTitle("Work For Me"); //Nome da janela
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Para realmente fechar a aplicação
@@ -99,24 +106,34 @@ public class TelaInicial extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (Objects.equals(e.getSource(),cadastrarUniversidade)){
+            boundx = this.getX();
+            boundy = this.getY();
+
             CadastroUniversidade uni = new CadastroUniversidade();
             uni.setVisible(true);
             dispose();
+
         }
 
         if (Objects.equals(e.getSource(),cadastrarCurso)){
+            boundx = this.getX();
+            boundy = this.getY();
             CadastroCurso cur = new CadastroCurso();
             cur.setVisible(true);
             dispose();
         }
 
         if (Objects.equals(e.getSource(),cadastrarAluno)){
+            boundx = this.getX();
+            boundy = this.getY();
             CadastroAluno alu = new CadastroAluno();
             alu.setVisible(true);
             dispose();
         }
 
         if (Objects.equals(e.getSource(),pesquisarCandidato)){
+            boundx = this.getX();
+            boundy = this.getY();
             PesquisaCandidato pes = new PesquisaCandidato();
             pes.setVisible(true);
             dispose();
