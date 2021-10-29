@@ -22,12 +22,12 @@ public class PesquisaCandidato extends JFrame implements ActionListener {
         ImageIcon icone = new ImageIcon("D:\\trabalhoFinal\\Work-for-me\\src\\Assets\\logo.png");
         this.setIconImage(icone.getImage()); // Tornando objeto imagem o icone
 
-        this.setBounds(TelaInicial.boundx,TelaInicial.boundy, 800, 600); //Definir tamanho da janela
+        this.setBounds(TelaInicial.boundx, TelaInicial.boundy, 800, 600); // Definir tamanho da janela
         this.setResizable(false); // Proibir redimensionamento
-        this.setTitle("Work For Me"); //Nome da janela
+        this.setTitle("Work For Me"); // Nome da janela
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Para realmente fechar a aplicação
-        this.getContentPane().setBackground(new Color(18, 18, 18)); //Colorindo background
-        this.getContentPane().setLayout(null); //configurando o layout para nulo, assim podemos usar o metodo setBounds
+        this.getContentPane().setBackground(new Color(18, 18, 18)); // Colorindo background
+        this.getContentPane().setLayout(null); // configurando o layout para nulo, assim podemos usar o metodo setBounds
 
         // Painel
         painel = new JPanel();
@@ -47,7 +47,7 @@ public class PesquisaCandidato extends JFrame implements ActionListener {
         header.setBorder(new EmptyBorder(10, 0, 0, 0)); // adicionando bordas
         painel.add(header);
 
-        //Campo estado
+        // Campo estado
         estado = new JTextField();
         estado.setText("Estado");
         estado.setBounds(300, 100, 200, 30);
@@ -56,7 +56,7 @@ public class PesquisaCandidato extends JFrame implements ActionListener {
         estado.addActionListener(this);
         painel.add(estado);
 
-        //Campo cidade
+        // Campo cidade
         cidade = new JTextField();
         cidade.setText("Cidade");
         cidade.setBounds(300, 150, 200, 30);
@@ -65,7 +65,7 @@ public class PesquisaCandidato extends JFrame implements ActionListener {
         cidade.addActionListener(this);
         painel.add(cidade);
 
-        //Campo cursoArea
+        // Campo cursoArea
         cursoArea = new JTextField();
         cursoArea.setText("Curso/Area");
         cursoArea.setBounds(300, 200, 200, 30);
@@ -131,9 +131,10 @@ public class PesquisaCandidato extends JFrame implements ActionListener {
         tabela.setVisible(true);
         info.setVisible(true);
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (Objects.equals(e.getSource(),voltar)){
+        if (Objects.equals(e.getSource(), voltar)) {
             TelaInicial.boundx = this.getX();
             TelaInicial.boundy = this.getY();
             TelaInicial ini = new TelaInicial();
@@ -141,13 +142,13 @@ public class PesquisaCandidato extends JFrame implements ActionListener {
             dispose();
         }
 
-        if (Objects.equals(e.getSource(),cadastrar)){
+        if (Objects.equals(e.getSource(), cadastrar)) {
             TelaInicial.boundx = this.getX();
             TelaInicial.boundy = this.getY();
             state = estado.getText();
             city = cidade.getText();
             carrearArea = cursoArea.getText();
-            JOptionPane.showMessageDialog(null,"Cadastro realizado com sucesso!");
+            JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
         }
     }
 }

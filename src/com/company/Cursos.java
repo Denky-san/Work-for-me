@@ -2,8 +2,7 @@ package com.company;
 
 import java.util.ArrayList;
 
-public class Cursos extends Pesquisa
-{
+public class Cursos extends Pesquisa {
     protected String nome, sigla, area;
 
     ArrayList<Alunos> alunos = new ArrayList<>();

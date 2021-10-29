@@ -1,12 +1,11 @@
 package com.company;
 
-public abstract class Pesquisa
-{
+public abstract class Pesquisa {
     private static int id = 1;
 
-    public int adicionaID(){
+    public int adicionaID() {
         int ID = this.getId();
-        this.setId(this.getId()+1);
+        this.setId(this.getId() + 1);
         return ID;
     }
 

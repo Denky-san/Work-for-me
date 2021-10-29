@@ -2,9 +2,8 @@ package com.company;
 
 import java.util.ArrayList;
 
-public class Universidade extends Pesquisa
-{
-    protected String endereco, bairro, cidade, estado;
+public class Universidade extends Pesquisa {
+    String nome, endereco, bairro, cidade, estado;
 
     protected ArrayList<Cursos> cursos = new ArrayList<>();
 
@@ -14,6 +13,14 @@ public class Universidade extends Pesquisa
         this.cidade = cidade;
         this.estado = estado;
         this.cursos = cursos;
+    }
+
+    public String getNome() {
+        return this.nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getEndereco() {
