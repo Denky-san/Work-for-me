@@ -20,9 +20,8 @@ public class TelaInicial extends JFrame implements ActionListener {
 
     TelaInicial(){
         // Criando objeto imagem
-        ImageIcon icone = new ImageIcon("D:\\trabalhoFinal\\Work-for-me\\src\\Assets\\logo.png");
+        ImageIcon icone = new ImageIcon("src\\Assets\\logo.png");
         this.setIconImage(icone.getImage()); // Tornando objeto imagem o icone
-
 
         this.setBounds(boundx, boundy,800,600); //Definir tamanho da janela
         this.setResizable(false); // Proibir redimensionamento
@@ -72,7 +71,7 @@ public class TelaInicial extends JFrame implements ActionListener {
         cadastrarAluno.addActionListener(this);
 
         // Botão para pesquisar candidado
-        ImageIcon lupa = new ImageIcon("D:\\trabalhoFinal\\Work-for-me\\src\\Assets\\lupa.png");
+        ImageIcon lupa = new ImageIcon("src\\Assets\\lupa.png");
         pesquisarCandidato = new JButton("Pesquisar candidato");
         pesquisarCandidato.setIcon(lupa);
         pesquisarCandidato.setIconTextGap(10);
@@ -108,7 +107,6 @@ public class TelaInicial extends JFrame implements ActionListener {
         if (Objects.equals(e.getSource(),cadastrarUniversidade)){
             boundx = this.getX();
             boundy = this.getY();
-
             CadastroUniversidade uni = new CadastroUniversidade();
             uni.setVisible(true);
             dispose();

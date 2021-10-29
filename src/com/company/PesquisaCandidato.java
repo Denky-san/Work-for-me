@@ -19,7 +19,7 @@ public class PesquisaCandidato extends JFrame implements ActionListener {
 
     PesquisaCandidato() {
         // Criando objeto imagem
-        ImageIcon icone = new ImageIcon("D:\\trabalhoFinal\\Work-for-me\\src\\Assets\\logo.png");
+        ImageIcon icone = new ImageIcon("src\\Assets\\logo.png");
         this.setIconImage(icone.getImage()); // Tornando objeto imagem o icone
 
         this.setBounds(TelaInicial.boundx,TelaInicial.boundy, 800, 600); //Definir tamanho da janela
