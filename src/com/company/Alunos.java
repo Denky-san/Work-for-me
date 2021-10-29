@@ -1,7 +1,6 @@
 package com.company;
 
-public class Alunos extends Pesquisa
-{
+public class Alunos extends Pesquisa {
     protected String nome, matricula, dataNascimento, anoIngresso, situacao;
 
     public String getNome() {

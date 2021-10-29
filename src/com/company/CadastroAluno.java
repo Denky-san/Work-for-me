@@ -11,22 +11,22 @@ public class CadastroAluno extends JFrame implements ActionListener {
 
     protected JPanel painel;
     protected JLabel header;
-    protected JTextField nome, matricula,dataNascimento, anoIngresso, situacao;
+    protected JTextField nome, matricula, dataNascimento, anoIngresso, situacao;
     protected String name, registration, birthDate, entryYear, situation;
     protected JButton cadastrar, voltar;
-    protected  JComboBox<String> listaFaculdades, listaCursos;
+    protected JComboBox<String> listaFaculdades, listaCursos;
 
     CadastroAluno() {
         // Criando objeto imagem
         ImageIcon icone = new ImageIcon("src\\Assets\\logo.png");
         this.setIconImage(icone.getImage()); // Tornando objeto imagem o icone
 
-        this.setBounds(TelaInicial.boundx,TelaInicial.boundy, 800, 600); //Definir tamanho da janela
+        this.setBounds(TelaInicial.boundx, TelaInicial.boundy, 800, 600); // Definir tamanho da janela
         this.setResizable(false); // Proibir redimensionamento
-        this.setTitle("Work For Me"); //Nome da janela
+        this.setTitle("Work For Me"); // Nome da janela
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Para realmente fechar a aplicação
-        this.getContentPane().setBackground(new Color(18, 18, 18)); //Colorindo background
-        this.getContentPane().setLayout(null); //configurando o layout para nulo, assim podemos usar o metodo setBounds
+        this.getContentPane().setBackground(new Color(18, 18, 18)); // Colorindo background
+        this.getContentPane().setLayout(null); // configurando o layout para nulo, assim podemos usar o metodo setBounds
 
         // Painel
         painel = new JPanel();
@@ -46,7 +46,7 @@ public class CadastroAluno extends JFrame implements ActionListener {
         header.setBorder(new EmptyBorder(10, 0, 0, 0)); // adicionando bordas
         painel.add(header);
 
-        //Campo nome
+        // Campo nome
         nome = new JTextField();
         nome.setText("Nome");
         nome.setBounds(300, 100, 200, 30);
@@ -55,7 +55,7 @@ public class CadastroAluno extends JFrame implements ActionListener {
         nome.addActionListener(this);
         painel.add(nome);
 
-        //Campo matricula
+        // Campo matricula
         matricula = new JTextField();
         matricula.setText("Matrícula");
         matricula.setBounds(300, 150, 200, 30);
@@ -64,7 +64,7 @@ public class CadastroAluno extends JFrame implements ActionListener {
         matricula.addActionListener(this);
         painel.add(matricula);
 
-        //Campo dataNascimento
+        // Campo dataNascimento
         dataNascimento = new JTextField();
         dataNascimento.setText("Data de nascimento");
         dataNascimento.setBounds(300, 200, 200, 30);
@@ -73,7 +73,7 @@ public class CadastroAluno extends JFrame implements ActionListener {
         dataNascimento.addActionListener(this);
         painel.add(dataNascimento);
 
-        //Campo anoIngresso
+        // Campo anoIngresso
         anoIngresso = new JTextField();
         anoIngresso.setText("Ano de ingresso");
         anoIngresso.setBounds(300, 250, 200, 30);
@@ -82,7 +82,7 @@ public class CadastroAluno extends JFrame implements ActionListener {
         anoIngresso.addActionListener(this);
         painel.add(anoIngresso);
 
-        //Campo situacao
+        // Campo situacao
         situacao = new JTextField();
         situacao.setText("Situação");
         situacao.setBounds(300, 300, 200, 30);
@@ -91,17 +91,19 @@ public class CadastroAluno extends JFrame implements ActionListener {
         situacao.addActionListener(this);
         painel.add(situacao);
 
-        //Campo faculdade
+        // Campo faculdade
         listaFaculdades = new JComboBox<String>();
         listaFaculdades.setFont(new Font("Arial", Font.PLAIN, 20));
-        listaFaculdades.setModel(new DefaultComboBoxModel<String>(new String[] {"Teste", "Teste", "Teste", "Não cadastrado"}));
+        listaFaculdades.setModel(
+                new DefaultComboBoxModel<String>(new String[] { "Teste", "Teste", "Teste", "Não cadastrado" }));
         listaFaculdades.setBounds(300, 350, 200, 30);
         painel.add(listaFaculdades);
 
-        //Campo cursos
+        // Campo cursos
         listaCursos = new JComboBox<String>();
         listaCursos.setFont(new Font("Arial", Font.PLAIN, 20));
-        listaCursos.setModel(new DefaultComboBoxModel<String>(new String[] {"Teste", "Teste", "Teste", "Não cadastrado"}));
+        listaCursos.setModel(
+                new DefaultComboBoxModel<String>(new String[] { "Teste", "Teste", "Teste", "Não cadastrado" }));
         listaCursos.setBounds(300, 400, 200, 30);
         painel.add(listaCursos);
 
@@ -138,13 +140,13 @@ public class CadastroAluno extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         TelaInicial.boundx = this.getX();
         TelaInicial.boundy = this.getY();
-        if (Objects.equals(e.getSource(),voltar)){
+        if (Objects.equals(e.getSource(), voltar)) {
             TelaInicial ini = new TelaInicial();
             ini.setVisible(true);
             dispose();
         }
 
-        if (Objects.equals(e.getSource(),cadastrar)){
+        if (Objects.equals(e.getSource(), cadastrar)) {
             TelaInicial.boundx = this.getX();
             TelaInicial.boundy = this.getY();
             name = nome.getText();
@@ -153,7 +155,7 @@ public class CadastroAluno extends JFrame implements ActionListener {
             entryYear = anoIngresso.getText();
             situation = situacao.getText();
 
-            JOptionPane.showMessageDialog(null,"Cadastro realizado com sucesso!");
+            JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
         }
     }
 }
