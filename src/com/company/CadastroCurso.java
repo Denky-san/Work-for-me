@@ -5,6 +5,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.Objects;
 
 public class CadastroCurso extends JFrame implements ActionListener {
@@ -15,6 +17,8 @@ public class CadastroCurso extends JFrame implements ActionListener {
     protected String name, initials, zone;
     protected JButton cadastrar, voltar;
     protected JComboBox<String> listaFaculdades;
+
+    protected static DefaultComboBoxModel model = new DefaultComboBoxModel();
 
     CadastroCurso() {
         // Criando objeto imagem
@@ -76,8 +80,12 @@ public class CadastroCurso extends JFrame implements ActionListener {
         // Campo faculdade
         listaFaculdades = new JComboBox<String>();
         listaFaculdades.setFont(new Font("Arial", Font.PLAIN, 20));
-        listaFaculdades.setModel(
-                new DefaultComboBoxModel<String>(new String[] { "Teste", "Teste", "Teste", "Não cadastrado" }));
+
+        for (int i = 0; i < CadastroUniversidade.aumentarNumFaculs + 1; i++) {
+            model.addElement(CadastroUniversidade.Universidades.get(i).getNome());
+        }
+
+        listaFaculdades.setModel(model);
         listaFaculdades.setBounds(300, 320, 200, 30);
         painel.add(listaFaculdades);
 

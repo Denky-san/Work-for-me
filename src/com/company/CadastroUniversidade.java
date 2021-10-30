@@ -5,6 +5,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class CadastroUniversidade extends JFrame implements ActionListener {
@@ -14,6 +15,9 @@ public class CadastroUniversidade extends JFrame implements ActionListener {
     protected JTextField nome, endereco, bairro, cidade, estado;
     protected String name, address, district, city, state;
     protected JButton cadastrar, voltar;
+
+    protected static ArrayList<Universidade> Universidades = new ArrayList<Universidade>();
+    protected static int aumentarNumFaculs = -1;
 
     CadastroUniversidade() {
         // Criando objeto imagem
@@ -136,6 +140,16 @@ public class CadastroUniversidade extends JFrame implements ActionListener {
             district = bairro.getText();
             city = cidade.getText();
             state = estado.getText();
+
+            Universidade Uni1 = new Universidade(nome.getText(), endereco.getText(),bairro.getText(),cidade.getText(),estado.getText());
+            //(endereco.getText(), bairro.getText(), cidade.getText(), estado.getText())
+
+            Universidades.add(Uni1);
+
+            aumentarNumFaculs++;
+
+            CadastroCurso.model.removeAllElements();
+
             JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
         }
     }

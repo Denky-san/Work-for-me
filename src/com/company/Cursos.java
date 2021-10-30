@@ -5,13 +5,14 @@ import java.util.ArrayList;
 public class Cursos extends Pesquisa {
     protected String nome, sigla, area;
 
-    ArrayList<Alunos> alunos = new ArrayList<>();
+    //ArrayList<Alunos> alunos = new ArrayList<>();
+    ArrayList<Universidade> universidades = new ArrayList<>();
 
-    public Cursos(String nome, String sigla, String area, ArrayList<Alunos> alunos) {
+    public Cursos(String nome, String sigla, String area, ArrayList<Universidade> universidades) {
         this.nome = nome;
         this.sigla = sigla;
         this.area = area;
-        this.alunos = alunos;
+        this.universidades = universidades;
     }
 
     public String getNome() {
