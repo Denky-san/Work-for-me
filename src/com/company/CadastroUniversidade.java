@@ -16,8 +16,10 @@ public class CadastroUniversidade extends JFrame implements ActionListener {
     protected String name, address, district, city, state;
     protected JButton cadastrar, voltar;
 
-    protected static ArrayList<Universidade> Universidades = new ArrayList<Universidade>();
-    protected static int aumentarNumFaculs = -1;
+
+
+    protected static ArrayList<Universidade> Universidades = new ArrayList<Universidade>();  //Criando uma ArrayList para armazenar as universidades
+    protected static int aumentarNumFaculs = -1; // Contador de quantidade de Faculdade (começa em -1 para evitar problemas de IndexOutOfBoundsException)
 
     CadastroUniversidade() {
         // Criando objeto imagem
@@ -135,18 +137,22 @@ public class CadastroUniversidade extends JFrame implements ActionListener {
         if (Objects.equals(e.getSource(), cadastrar)) {
             TelaInicial.boundx = this.getX();
             TelaInicial.boundy = this.getY();
-            name = nome.getText();
-            address = endereco.getText();
-            district = bairro.getText();
-            city = cidade.getText();
-            state = estado.getText();
 
+            // Criando uma universidade passando os devidos parâmetros.
             Universidade Uni1 = new Universidade(nome.getText(), endereco.getText(),bairro.getText(),cidade.getText(),estado.getText());
-            //(endereco.getText(), bairro.getText(), cidade.getText(), estado.getText())
 
-            Universidades.add(Uni1);
+            Universidades.add(Uni1); // Adicioanndo a universidade criada para a ArrayList
 
             aumentarNumFaculs++;
+
+            /*
+                Removendo todos os elementos do modelo ComboBoxModel para evitar problemas de repetição do for do CadastroCurso.java, linha 84.
+
+                for (int i = 0; i < CadastroUniversidade.aumentarNumFaculs + 1; i++) {
+                model.addElement(CadastroUniversidade.Universidades.get(i).getNome());
+                }
+
+             */
 
             CadastroCurso.model.removeAllElements();
 

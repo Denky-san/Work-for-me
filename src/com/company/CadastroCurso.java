@@ -18,6 +18,8 @@ public class CadastroCurso extends JFrame implements ActionListener {
     protected JButton cadastrar, voltar;
     protected JComboBox<String> listaFaculdades;
 
+
+    // Criando um modelo especifico do ComboBoxModel para não usar o default com ComboBoxModel com Strings inicializadas.
     protected static DefaultComboBoxModel model = new DefaultComboBoxModel();
 
     CadastroCurso() {
@@ -81,11 +83,16 @@ public class CadastroCurso extends JFrame implements ActionListener {
         listaFaculdades = new JComboBox<String>();
         listaFaculdades.setFont(new Font("Arial", Font.PLAIN, 20));
 
+        /*
+            Adicionando TODOS os elementos (faculdades cadastradas) novamente ao modelo para exibir.
+            Para mais info ler CadastroUniversidade.java, linha 149
+         */
+
         for (int i = 0; i < CadastroUniversidade.aumentarNumFaculs + 1; i++) {
             model.addElement(CadastroUniversidade.Universidades.get(i).getNome());
         }
 
-        listaFaculdades.setModel(model);
+        listaFaculdades.setModel(model); // Só faltar settar aqui o modelo.
         listaFaculdades.setBounds(300, 320, 200, 30);
         painel.add(listaFaculdades);
 
