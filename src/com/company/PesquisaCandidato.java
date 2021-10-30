@@ -10,12 +10,13 @@ import java.util.Objects;
 
 public class PesquisaCandidato extends JFrame implements ActionListener {
 
-    protected JPanel painel;
+    protected JPanel painel, painelResultado;
     protected JLabel header, info;
     protected JTextField estado, cidade, cursoArea;
     protected String state, city, carrearArea;
     protected JButton cadastrar, voltar;
     protected JTable tabela;
+    protected JScrollPane scroll;
 
     PesquisaCandidato() {
         // Criando objeto imagem
@@ -107,16 +108,18 @@ public class PesquisaCandidato extends JFrame implements ActionListener {
         tabela.setBorder(new LineBorder(Color.black));
         tabela.setGridColor(Color.black);
         tabela.setShowGrid(true);
-        JPanel panelResultado = new JPanel();
-        panelResultado.setBackground(Color.DARK_GRAY);
-        panelResultado.setBounds(190, 221, 594, 239);
-        painel.add(panelResultado);
 
-        JScrollPane scroll = new JScrollPane();
+        painelResultado = new JPanel();
+        painelResultado.setBackground(new Color(18, 18, 18));
+        painelResultado.setBounds(0, 310, 800, 280);
+        painelResultado.setLayout(null);
+        painel.add(painelResultado);
+
+        scroll = new JScrollPane();
         scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-        scroll.setBounds(10, 11, 574, 217);
-        panelResultado.add(scroll);
+        scroll.setBounds(43, 0, 700, 250);
+        painelResultado.add(scroll);
         scroll.setViewportView(tabela);
 
         // Tornando tudo visivel
@@ -128,8 +131,8 @@ public class PesquisaCandidato extends JFrame implements ActionListener {
         cursoArea.setVisible(true);
         cadastrar.setVisible(true);
         voltar.setVisible(true);
-        tabela.setVisible(true);
         info.setVisible(true);
+        tabela.setVisible(true);
     }
 
     @Override
