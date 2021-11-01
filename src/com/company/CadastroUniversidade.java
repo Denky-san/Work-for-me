@@ -5,6 +5,9 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -13,9 +16,7 @@ public class CadastroUniversidade extends JFrame implements ActionListener {
     protected JPanel painel;
     protected JLabel header;
     protected JTextField nome, endereco, bairro, cidade, estado;
-    protected String name, address, district, city, state;
     protected JButton cadastrar, voltar;
-
 
     protected static ArrayList<Universidade> UniversidadesArr = new ArrayList<Universidade>();  //Criando uma ArrayList para armazenar as universidades
     protected static int aumentarNumFaculs = -1; // Contador de quantidade de Faculdade (começa em -1 para evitar problemas de IndexOutOfBoundsException)
@@ -140,9 +141,44 @@ public class CadastroUniversidade extends JFrame implements ActionListener {
             // Criando uma universidade passando os devidos parâmetros.
             Universidade Uni = new Universidade(nome.getText(), endereco.getText(), bairro.getText(), cidade.getText(), estado.getText());
 
+            try
+            {
+                File bancoDados = new File("src\\banco_dados.txt");
+                if (bancoDados.createNewFile())
+                {
+                    System.out.println("Arquivo criado: " + bancoDados.getName());
+                }
+                else
+                {
+                    System.out.println("Arquivo ja existe.");
+                }
+            }
+            catch (IOException ev)
+            {
+                System.out.println("Um erro ocorreu.");
+                ev.printStackTrace();
+            }
+
+
             UniversidadesArr.add(Uni); // Adicionando a universidade criada para a ArrayList
 
             aumentarNumFaculs++;
+
+            try
+            {
+                FileWriter escreverArq = new FileWriter("src\\banco_dados.txt");
+                escreverArq.write(UniversidadesArr.get(aumentarNumFaculs).getNome() + "," + UniversidadesArr.get(aumentarNumFaculs).getEndereco()
+                        + "," + UniversidadesArr.get(aumentarNumFaculs).getBairro() + "," + UniversidadesArr.get(aumentarNumFaculs).getCidade()
+                        + "," + UniversidadesArr.get(aumentarNumFaculs).getEstado());
+                escreverArq.flush();
+                escreverArq.close();
+                System.out.println("Arquivo escrito com sucesso.");
+            }
+            catch (IOException ev)
+            {
+                System.out.println("Um erro ocorreu.");
+                ev.printStackTrace();
+            }
 
             JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
         }

@@ -112,7 +112,6 @@ public class TelaInicial extends JFrame implements ActionListener {
             CadastroUniversidade uni = new CadastroUniversidade();
             uni.setVisible(true);
             dispose();
-
         }
 
         if (Objects.equals(e.getSource(), cadastrarCurso)) {
