@@ -24,7 +24,7 @@ public class CadastroCurso extends JFrame implements ActionListener {
 
 
     // Criando um modelo especifico do ComboBoxModel para não usar o default com ComboBoxModel com Strings inicializadas.
-    protected static DefaultComboBoxModel model = new DefaultComboBoxModel();
+    protected static DefaultComboBoxModel modelFacul = new DefaultComboBoxModel();
 
     CadastroCurso() {
         // Criando objeto imagem
@@ -87,7 +87,7 @@ public class CadastroCurso extends JFrame implements ActionListener {
         listaFaculdades = new JComboBox<String>();
         listaFaculdades.setFont(new Font("Arial", Font.PLAIN, 20));
 
-        model.removeAllElements(); // Removendo todos os elementos do modelo ComboBoxModel para evitar problemas de repetição do for.
+        modelFacul.removeAllElements(); // Removendo todos os elementos do modelo ComboBoxModel para evitar problemas de repetição do for.
 
         /*
             Adicionando TODOS os elementos (faculdades cadastradas) novamente ao modelo para exibir.
@@ -95,10 +95,10 @@ public class CadastroCurso extends JFrame implements ActionListener {
          */
 
         for (int i = 0; i < CadastroUniversidade.aumentarNumFaculs + 1; i++) {
-            model.addElement(CadastroUniversidade.UniversidadesArr.get(i).getNome());
+            modelFacul.addElement(CadastroUniversidade.UniversidadesArr.get(i).getNome());
         }
 
-        listaFaculdades.setModel(model); // Só faltar settar aqui o modelo.
+        listaFaculdades.setModel(modelFacul); // Só faltar settar aqui o modelo.
         listaFaculdades.setBounds(300, 320, 200, 30);
         painel.add(listaFaculdades);
 
@@ -146,7 +146,7 @@ public class CadastroCurso extends JFrame implements ActionListener {
             zone = area.getText();
 
             // Criando um array de cursos passando os devidos parâmetros.
-            Cursos Cur = new Cursos(nome.getText(), sigla.getText(),area.getText(), CadastroUniversidade.UniversidadesArr.get(model.getIndexOf(name)));
+            Cursos Cur = new Cursos(nome.getText(), sigla.getText(),area.getText(), CadastroUniversidade.UniversidadesArr.get(modelFacul.getIndexOf(name)));
 
             CursosArray.add(Cur); // Adicionando a universidade criada para a ArrayList
 

@@ -5,6 +5,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class CadastroAluno extends JFrame implements ActionListener {
@@ -15,6 +16,10 @@ public class CadastroAluno extends JFrame implements ActionListener {
     protected String name, registration, birthDate, entryYear, situation;
     protected JButton cadastrar, voltar;
     protected JComboBox<String> listaFaculdades, listaCursos;
+
+    protected static DefaultComboBoxModel modelCur = new DefaultComboBoxModel();
+
+    ArrayList<Alunos> AlunosArr = new ArrayList<>();
 
     CadastroAluno() {
         // Criando objeto imagem
@@ -94,30 +99,47 @@ public class CadastroAluno extends JFrame implements ActionListener {
         // Campo faculdade
         listaFaculdades = new JComboBox<String>();
         listaFaculdades.setFont(new Font("Arial", Font.PLAIN, 20));
-        listaFaculdades.setModel(
-                new DefaultComboBoxModel<String>(new String[] { "Teste", "Teste", "Teste", "Não cadastrado" }));
+
+        CadastroCurso.modelFacul.removeAllElements(); // Removendo todos os elementos do modelo ComboBoxModel para evitar problemas de repetição do for.
+        modelCur.removeAllElements(); // Removendo todos os elementos do modelo ComboBoxModel para evitar problemas de repetição do for.
+
+        /*
+            Adicionando TODOS os elementos (faculdades cadastradas) novamente ao modelo para exibir.
+            Para mais info ler CadastroUniversidade.java, linha 149
+         */
+
+        for (int i = 0; i < CadastroUniversidade.aumentarNumFaculs + 1; i++) {
+            CadastroCurso.modelFacul.addElement(CadastroUniversidade.UniversidadesArr.get(i).getNome());
+        }
+
+        listaFaculdades.setModel(CadastroCurso.modelFacul);
         listaFaculdades.setBounds(300, 350, 200, 30);
         painel.add(listaFaculdades);
 
         // Campo cursos
         listaCursos = new JComboBox<String>();
         listaCursos.setFont(new Font("Arial", Font.PLAIN, 20));
-        listaCursos.setModel(
-                new DefaultComboBoxModel<String>(new String[] { "Teste", "Teste", "Teste", "Não cadastrado" }));
+
+
+        for (int i = 0; i < CadastroCurso.aumentarNumCursos + 1; i++) {
+            modelCur.addElement(CadastroCurso.CursosArray.get(i).getNome());
+        }
+
+        listaCursos.setModel(modelCur);
         listaCursos.setBounds(300, 400, 200, 30);
         painel.add(listaCursos);
 
         // Botão para voltar
         voltar = new JButton("Voltar");
         voltar.setBounds(300, 450, 70, 30);
-        voltar.setFocusable(false); // tirar caixa pontilhada que ficava em volta da palavra dentro do botão
+        voltar.setFocusable(false); // tirar caixa pontilhada que ficava em volta da palavra no botão
         painel.add(voltar);
         voltar.addActionListener(this);
 
         // Botão para cadastrar
         cadastrar = new JButton("Cadastrar");
         cadastrar.setBounds(400, 450, 100, 30);
-        cadastrar.setFocusable(false); // tirar caixa pontilhada que ficava em volta da palavra dentro do botão
+        cadastrar.setFocusable(false); // tirar caixa pontilhada que ficava em volta da palavra no botão
         painel.add(cadastrar);
         cadastrar.addActionListener(this);
 
