@@ -17,8 +17,7 @@ public class CadastroUniversidade extends JFrame implements ActionListener {
     protected JButton cadastrar, voltar;
 
 
-
-    protected static ArrayList<Universidade> Universidades = new ArrayList<Universidade>();  //Criando uma ArrayList para armazenar as universidades
+    protected static ArrayList<Universidade> UniversidadesArr = new ArrayList<Universidade>();  //Criando uma ArrayList para armazenar as universidades
     protected static int aumentarNumFaculs = -1; // Contador de quantidade de Faculdade (começa em -1 para evitar problemas de IndexOutOfBoundsException)
 
     CadastroUniversidade() {
@@ -139,22 +138,11 @@ public class CadastroUniversidade extends JFrame implements ActionListener {
             TelaInicial.boundy = this.getY();
 
             // Criando uma universidade passando os devidos parâmetros.
-            Universidade Uni1 = new Universidade(nome.getText(), endereco.getText(),bairro.getText(),cidade.getText(),estado.getText());
+            Universidade Uni = new Universidade(nome.getText(), endereco.getText(), bairro.getText(), cidade.getText(), estado.getText());
 
-            Universidades.add(Uni1); // Adicioanndo a universidade criada para a ArrayList
+            UniversidadesArr.add(Uni); // Adicionando a universidade criada para a ArrayList
 
             aumentarNumFaculs++;
-
-            /*
-                Removendo todos os elementos do modelo ComboBoxModel para evitar problemas de repetição do for do CadastroCurso.java, linha 84.
-
-                for (int i = 0; i < CadastroUniversidade.aumentarNumFaculs + 1; i++) {
-                model.addElement(CadastroUniversidade.Universidades.get(i).getNome());
-                }
-
-             */
-
-            CadastroCurso.model.removeAllElements();
 
             JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
         }

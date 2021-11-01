@@ -3,16 +3,15 @@ package com.company;
 import java.util.ArrayList;
 
 public class Cursos extends Pesquisa {
+
     protected String nome, sigla, area;
+    protected Universidade universidade;
 
-    //ArrayList<Alunos> alunos = new ArrayList<>();
-    ArrayList<Universidade> universidades = new ArrayList<>();
-
-    public Cursos(String nome, String sigla, String area, ArrayList<Universidade> universidades) {
+    public Cursos(String nome, String sigla, String area, Universidade universidades) {
         this.nome = nome;
         this.sigla = sigla;
         this.area = area;
-        this.universidades = universidades;
+        this.universidade = universidades;
     }
 
     public String getNome() {
@@ -39,6 +38,14 @@ public class Cursos extends Pesquisa {
         this.area = area;
     }
 
+    public Universidade getUniversidade() {
+        return universidade;
+    }
+
+    public void setUniversidade(Universidade universidade) {
+        this.universidade = universidade;
+    }
+
     @Override
     public void inclusao() {
 
@@ -58,4 +65,5 @@ public class Cursos extends Pesquisa {
     public void exclusao() {
 
     }
+
 }
