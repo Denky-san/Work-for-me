@@ -18,8 +18,8 @@ public class CadastroUniversidade extends JFrame implements ActionListener {
     protected JTextField nome, endereco, bairro, cidade, estado;
     protected JButton cadastrar, voltar;
 
-    protected static ArrayList<Universidade> UniversidadesArr = new ArrayList<Universidade>();  //Criando uma ArrayList para armazenar as universidades
-    protected static int aumentarNumFaculs = -1; // Contador de quantidade de Faculdade (começa em -1 para evitar problemas de IndexOutOfBoundsException)
+    protected static ArrayList<Universidade> UniversidadesArr = new ArrayList<>();  //Criando uma ArrayList para armazenar as universidades
+    protected static int aumentarNumUniver = -1; // Contador de quantidade de Universidades (começa em -1 para evitar problemas de IndexOutOfBoundsException)
 
     CadastroUniversidade() {
         // Criando objeto imagem
@@ -110,7 +110,7 @@ public class CadastroUniversidade extends JFrame implements ActionListener {
         painel.add(cadastrar);
         cadastrar.addActionListener(this);
 
-        // Tornando tudo visivel
+        // Tornando tudo visível
         this.setVisible(true);
         painel.setVisible(true);
         header.setVisible(true);
@@ -132,6 +132,7 @@ public class CadastroUniversidade extends JFrame implements ActionListener {
             TelaInicial ini = new TelaInicial();
             ini.setVisible(true);
             dispose();
+            CadastroCurso.modelUniver.removeElement("Não cadastrado");
         }
 
         if (Objects.equals(e.getSource(), cadastrar)) {
@@ -140,6 +141,16 @@ public class CadastroUniversidade extends JFrame implements ActionListener {
 
             // Criando uma universidade passando os devidos parâmetros.
             Universidade Uni = new Universidade(nome.getText(), endereco.getText(), bairro.getText(), cidade.getText(), estado.getText());
+
+            UniversidadesArr.add(Uni); // Adicionando a universidade criada para a ArrayList
+
+            aumentarNumUniver++;
+
+            // Adicionando os nomes para aparecer no cadastro de cursos
+
+            CadastroCurso.modelUniver.addElement(CadastroUniversidade.UniversidadesArr.get(aumentarNumUniver).getNome());
+
+            // Criando arquivo para armazenar os dados
 
             try
             {
@@ -159,17 +170,14 @@ public class CadastroUniversidade extends JFrame implements ActionListener {
                 ev.printStackTrace();
             }
 
-
-            UniversidadesArr.add(Uni); // Adicionando a universidade criada para a ArrayList
-
-            aumentarNumFaculs++;
+            // Escrevendo os dados das universidades.
 
             try
             {
                 FileWriter escreverArq = new FileWriter("src\\banco_dados.txt");
-                escreverArq.write(UniversidadesArr.get(aumentarNumFaculs).getNome() + "," + UniversidadesArr.get(aumentarNumFaculs).getEndereco()
-                        + "," + UniversidadesArr.get(aumentarNumFaculs).getBairro() + "," + UniversidadesArr.get(aumentarNumFaculs).getCidade()
-                        + "," + UniversidadesArr.get(aumentarNumFaculs).getEstado());
+                escreverArq.write(UniversidadesArr.get(aumentarNumUniver).getNome() + "," + UniversidadesArr.get(aumentarNumUniver).getEndereco()
+                        + "," + UniversidadesArr.get(aumentarNumUniver).getBairro() + "," + UniversidadesArr.get(aumentarNumUniver).getCidade()
+                        + "," + UniversidadesArr.get(aumentarNumUniver).getEstado());
                 escreverArq.flush();
                 escreverArq.close();
                 System.out.println("Arquivo escrito com sucesso.");

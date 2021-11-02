@@ -15,16 +15,19 @@ public class CadastroCurso extends JFrame implements ActionListener {
     protected JPanel painel;
     protected JLabel header;
     protected JTextField nome, sigla, area;
-    protected String name, initials, zone;
     protected JButton cadastrar, voltar;
     protected JComboBox<String> listaFaculdades;
 
+    protected static Universidade UniEscolhida;
+
     protected static ArrayList<Cursos> CursosArray = new ArrayList<>();  //Criando uma ArrayList para armazenar as universidades
-    protected static int aumentarNumCursos = -1; // Contador de quantidade de Faculdade (começa em -1 para evitar problemas de IndexOutOfBoundsException)
+    protected static int aumentarNumCursos = -1; // Contador de quantidade de Cursos (começa em -1 para evitar problemas de IndexOutOfBoundsException)
 
 
     // Criando um modelo especifico do ComboBoxModel para não usar o default com ComboBoxModel com Strings inicializadas.
-    protected static DefaultComboBoxModel modelFacul = new DefaultComboBoxModel();
+    protected static DefaultComboBoxModel modelUniver = new DefaultComboBoxModel();
+
+    protected static DefaultComboBoxModel modelCursos = new DefaultComboBoxModel();
 
     CadastroCurso() {
         // Criando objeto imagem
@@ -84,21 +87,18 @@ public class CadastroCurso extends JFrame implements ActionListener {
         painel.add(area);
 
         // Campo faculdade
-        listaFaculdades = new JComboBox<String>();
+        listaFaculdades = new JComboBox<>();
         listaFaculdades.setFont(new Font("Arial", Font.PLAIN, 20));
 
-        modelFacul.removeAllElements(); // Removendo todos os elementos do modelo ComboBoxModel para evitar problemas de repetição do for.
-
-        /*
-            Adicionando TODOS os elementos (faculdades cadastradas) novamente ao modelo para exibir.
-            Para mais info ler CadastroUniversidade.java, linha 149
-         */
-
-        for (int i = 0; i < CadastroUniversidade.aumentarNumFaculs + 1; i++) {
-            modelFacul.addElement(CadastroUniversidade.UniversidadesArr.get(i).getNome());
+        if (CadastroUniversidade.aumentarNumUniver < 0)
+        {
+            modelUniver.addElement("Não cadastrado");
         }
-
-        listaFaculdades.setModel(modelFacul); // Só faltar settar aqui o modelo.
+        else
+        {
+            modelUniver.removeElement("Não cadastrado");
+        }
+        listaFaculdades.setModel(modelUniver); // Só faltar settar aqui o modelo.
         listaFaculdades.setBounds(300, 320, 200, 30);
         painel.add(listaFaculdades);
 
@@ -136,31 +136,33 @@ public class CadastroCurso extends JFrame implements ActionListener {
             TelaInicial ini = new TelaInicial();
             ini.setVisible(true);
             dispose();
+            CadastroCurso.modelUniver.removeElement("Não cadastrado");
         }
 
         if (Objects.equals(e.getSource(), cadastrar)) {
             TelaInicial.boundx = this.getX();
             TelaInicial.boundy = this.getY();
-            name = nome.getText();
-            initials = sigla.getText();
-            zone = area.getText();
+
+            String temp = (String) modelUniver.getSelectedItem();
+
+            System.out.println(temp);
+
+            for (int i = 0; i < CadastroUniversidade.aumentarNumUniver + 1; i++)
+            {
+                if (temp.equals(CadastroUniversidade.UniversidadesArr.get(i).getNome()))
+                {
+                    UniEscolhida = CadastroUniversidade.UniversidadesArr.get(i);
+                }
+            }
 
             // Criando um array de cursos passando os devidos parâmetros.
-            Cursos Cur = new Cursos(nome.getText(), sigla.getText(),area.getText(), CadastroUniversidade.UniversidadesArr.get(modelFacul.getIndexOf(name)));
+            Cursos Cur = new Cursos(nome.getText(), sigla.getText(), area.getText(), UniEscolhida);
 
             CursosArray.add(Cur); // Adicionando a universidade criada para a ArrayList
 
             aumentarNumCursos++;
 
-            /*
-                Removendo todos os elementos do modelo ComboBoxModel para evitar problemas de repetição do for do CadastroCurso.java, linha 84.
-
-                for (int i = 0; i < CadastroUniversidade.aumentarNumFaculs + 1; i++) {
-                model.addElement(CadastroUniversidade.Universidades.get(i).getNome());
-                }
-
-             */
-
+            modelCursos.addElement(CursosArray.get(aumentarNumCursos).getNome());
 
             JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
         }

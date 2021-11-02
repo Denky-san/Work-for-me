@@ -10,8 +10,6 @@ import java.util.Objects;
 public class TelaInicial extends JFrame implements ActionListener {
 
     static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    double width = screenSize.getWidth();
-    double height = screenSize.getHeight();
 
     protected static int boundx = (screenSize.width / 2) - 400;
     protected static int boundy = (screenSize.height / 2) - 300;
