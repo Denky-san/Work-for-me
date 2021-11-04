@@ -5,9 +5,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -17,6 +15,10 @@ public class CadastroUniversidade extends JFrame implements ActionListener {
     protected JLabel header;
     protected JTextField nome, endereco, bairro, cidade, estado;
     protected JButton cadastrar, voltar;
+
+    protected static File bancoDados = new File("src\\banco_dados.txt");
+
+
 
     protected static ArrayList<Universidade> UniversidadesArr = new ArrayList<>();  //Criando uma ArrayList para armazenar as universidades
     protected static int aumentarNumUniver = -1; // Contador de quantidade de Universidades (começa em -1 para evitar problemas de IndexOutOfBoundsException)
@@ -154,7 +156,6 @@ public class CadastroUniversidade extends JFrame implements ActionListener {
 
             try
             {
-                File bancoDados = new File("src\\banco_dados.txt");
                 if (bancoDados.createNewFile())
                 {
                     System.out.println("Arquivo criado: " + bancoDados.getName());
@@ -174,12 +175,14 @@ public class CadastroUniversidade extends JFrame implements ActionListener {
 
             try
             {
+                OutputStream os = new FileOutputStream(bancoDados);
+                OutputStreamWriter osw = new OutputStreamWriter(os);
+                BufferedWriter bw = new BufferedWriter(osw);
+
                 FileWriter escreverArq = new FileWriter("src\\banco_dados.txt");
-                escreverArq.write(UniversidadesArr.get(aumentarNumUniver).getNome() + "," + UniversidadesArr.get(aumentarNumUniver).getEndereco()
-                        + "," + UniversidadesArr.get(aumentarNumUniver).getBairro() + "," + UniversidadesArr.get(aumentarNumUniver).getCidade()
-                        + "," + UniversidadesArr.get(aumentarNumUniver).getEstado());
-                escreverArq.flush();
-                escreverArq.close();
+                bw.write(UniversidadesArr.get(aumentarNumUniver).getEstado() + "," + UniversidadesArr.get(aumentarNumUniver).getCidade() + "\n");
+                bw.write(UniversidadesArr.get(aumentarNumUniver).getEstado() + "," +  UniversidadesArr.get(aumentarNumUniver).getCidade());
+                bw.close();
                 System.out.println("Arquivo escrito com sucesso.");
             }
             catch (IOException ev)

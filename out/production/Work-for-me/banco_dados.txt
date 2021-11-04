@@ -1,1 +1,2 @@
-Nome,Endereço,Bairro,Cidade,Estado
+Nome
+Area

@@ -14,7 +14,7 @@ public class PesquisaCandidato extends JFrame implements ActionListener {
     protected JLabel header, info;
     protected JTextField estado, cidade, cursoArea;
     protected String state, city, carrearArea;
-    protected JButton cadastrar, voltar;
+    protected JButton pesquisar, voltar;
     protected JTable tabela;
     protected JScrollPane scroll;
 
@@ -82,12 +82,12 @@ public class PesquisaCandidato extends JFrame implements ActionListener {
         painel.add(voltar);
         voltar.addActionListener(this);
 
-        // Botão para cadastrar
-        cadastrar = new JButton("Cadastrar");
-        cadastrar.setBounds(400, 250, 100, 30);
-        cadastrar.setFocusable(false); // tirar caixa pontilhada que ficava em volta da palavra dentro do botão
-        painel.add(cadastrar);
-        cadastrar.addActionListener(this);
+        // Botão para pesquisar
+        pesquisar = new JButton("Pesquisar");
+        pesquisar.setBounds(400, 250, 100, 30);
+        pesquisar.setFocusable(false); // tirar caixa pontilhada que ficava em volta da palavra dentro do botão
+        painel.add(pesquisar);
+        pesquisar.addActionListener(this);
 
         // Info da página
         info = new JLabel();
@@ -129,7 +129,7 @@ public class PesquisaCandidato extends JFrame implements ActionListener {
         estado.setVisible(true);
         cidade.setVisible(true);
         cursoArea.setVisible(true);
-        cadastrar.setVisible(true);
+        pesquisar.setVisible(true);
         voltar.setVisible(true);
         info.setVisible(true);
         tabela.setVisible(true);
@@ -145,13 +145,16 @@ public class PesquisaCandidato extends JFrame implements ActionListener {
             dispose();
         }
 
-        if (Objects.equals(e.getSource(), cadastrar)) {
+        if (Objects.equals(e.getSource(), pesquisar)) {
             TelaInicial.boundx = this.getX();
             TelaInicial.boundy = this.getY();
             state = estado.getText();
             city = cidade.getText();
             carrearArea = cursoArea.getText();
-            JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
+
+
+
+            //JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
         }
     }
 }

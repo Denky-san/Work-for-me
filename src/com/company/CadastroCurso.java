@@ -5,8 +5,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -18,7 +17,7 @@ public class CadastroCurso extends JFrame implements ActionListener {
     protected JButton cadastrar, voltar;
     protected JComboBox<String> listaFaculdades;
 
-    protected static Universidade UniEscolhida;
+    protected static Universidade uniEscolhida;
 
     protected static ArrayList<Cursos> CursosArray = new ArrayList<>();  //Criando uma ArrayList para armazenar as universidades
     protected static int aumentarNumCursos = -1; // Contador de quantidade de Cursos (começa em -1 para evitar problemas de IndexOutOfBoundsException)
@@ -151,18 +150,36 @@ public class CadastroCurso extends JFrame implements ActionListener {
             {
                 if (temp.equals(CadastroUniversidade.UniversidadesArr.get(i).getNome()))
                 {
-                    UniEscolhida = CadastroUniversidade.UniversidadesArr.get(i);
+                    uniEscolhida = CadastroUniversidade.UniversidadesArr.get(i);
                 }
             }
 
             // Criando um array de cursos passando os devidos parâmetros.
-            Cursos Cur = new Cursos(nome.getText(), sigla.getText(), area.getText(), UniEscolhida);
+            Cursos Cur = new Cursos(nome.getText(), sigla.getText(), area.getText(), uniEscolhida);
 
             CursosArray.add(Cur); // Adicionando a universidade criada para a ArrayList
 
             aumentarNumCursos++;
 
             modelCursos.addElement(CursosArray.get(aumentarNumCursos).getNome());
+
+            try
+            {
+                OutputStream os = new FileOutputStream(CadastroUniversidade.bancoDados);
+                OutputStreamWriter osw = new OutputStreamWriter(os);
+                BufferedWriter bw = new BufferedWriter(osw);
+
+                FileWriter escreverArq = new FileWriter("src\\banco_dados.txt");
+                bw.write(CursosArray.get(aumentarNumCursos).getNome() + "\n");
+                bw.write(CursosArray.get(aumentarNumCursos).getArea());
+                bw.close();
+                System.out.println("Arquivo escrito com sucesso.");
+            }
+            catch (IOException ev)
+            {
+                System.out.println("Um erro ocorreu.");
+                ev.printStackTrace();
+            }
 
             JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
         }

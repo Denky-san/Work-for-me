@@ -3,6 +3,19 @@ package com.company;
 public class Alunos extends Pesquisa {
     protected String nome, matricula, dataNascimento, anoIngresso, situacao;
 
+    Universidade universidadeDoAluno;
+    Cursos cursoDoAluno;
+
+    public Alunos(String nome, String matricula, String dataNascimento, String anoIngresso, String situacao, Universidade uni, Cursos curso) {
+        this.nome = nome;
+        this.matricula = matricula;
+        this.dataNascimento = dataNascimento;
+        this.anoIngresso = anoIngresso;
+        this.situacao = situacao;
+        this.universidadeDoAluno = uni;
+        this.cursoDoAluno = curso;
+    }
+
     public String getNome() {
         return nome;
     }
