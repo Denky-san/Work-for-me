@@ -197,7 +197,7 @@ public class PesquisaCandidato extends JFrame implements ActionListener {
                 OutputStreamWriter osw = new OutputStreamWriter(os);
                 BufferedWriter bw = new BufferedWriter(osw);
 
-                for (int i = 0; i <CadastroCurso.aumentarNumCursos + 1; i++)
+                for (int i = 0; i < CadastroCurso.aumentarNumCursos + 1; i++)
                 {
                     bw.write(CadastroCurso.CursosArray.get(i).universidade.getEstado() + "," +
                             CadastroCurso.CursosArray.get(i).universidade.getCidade() + "," +
@@ -252,16 +252,16 @@ public class PesquisaCandidato extends JFrame implements ActionListener {
                     if (currentLine[i].equals(estado.getText() + "," + cidade.getText() + "," + cursoArea.getText() + "#"))
                     {
                         System.out.println("oi");
-                    }
-                    else
-                    {
-                        System.out.println("sem oi p vc");
+
+
+                        //model_test.
                     }
                 }
 
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
+
             try {
                 reader.close();
             } catch (IOException ex) {

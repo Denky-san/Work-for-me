@@ -148,14 +148,6 @@ public class CadastroUniversidade extends JFrame implements ActionListener {
 
             CadastroCurso.modelUniver.addElement(CadastroUniversidade.UniversidadesArr.get(aumentarNumUniver).getNome());
 
-
-
-
-
-
-
-
-
             JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
         }
     }

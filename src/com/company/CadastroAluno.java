@@ -142,7 +142,6 @@ public class CadastroAluno extends JFrame implements ActionListener {
         painel.add(voltar);
         voltar.addActionListener(this);
 
-
         // Botão para cadastrar
         cadastrar = new JButton("Cadastrar");
         cadastrar.setBounds(400, 450, 100, 30);
@@ -174,7 +173,7 @@ public class CadastroAluno extends JFrame implements ActionListener {
             ini.setVisible(true);
             dispose();
             CadastroCurso.modelUniver.removeElement("Não cadastrado");
-            CadastroCurso.modelUniver.removeElement("Não cadastrado");
+            CadastroCurso.modelCursos.removeElement("Não cadastrado");
         }
 
         if (Objects.equals(e.getSource(), cadastrar)) {
