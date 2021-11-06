@@ -163,24 +163,6 @@ public class CadastroCurso extends JFrame implements ActionListener {
 
             modelCursos.addElement(CursosArray.get(aumentarNumCursos).getNome());
 
-            try
-            {
-                OutputStream os = new FileOutputStream(CadastroUniversidade.bancoDados);
-                OutputStreamWriter osw = new OutputStreamWriter(os);
-                BufferedWriter bw = new BufferedWriter(osw);
-
-                FileWriter escreverArq = new FileWriter("src\\banco_dados.txt");
-                bw.write(CursosArray.get(aumentarNumCursos).getNome() + "\n");
-                bw.write(CursosArray.get(aumentarNumCursos).getArea());
-                bw.close();
-                System.out.println("Arquivo escrito com sucesso.");
-            }
-            catch (IOException ev)
-            {
-                System.out.println("Um erro ocorreu.");
-                ev.printStackTrace();
-            }
-
             JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
         }
     }

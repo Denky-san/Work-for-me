@@ -3,9 +3,12 @@ package com.company;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.table.TableModel;
+import javax.xml.stream.events.EndDocument;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
 import java.util.Objects;
 
 public class PesquisaCandidato extends JFrame implements ActionListener {
@@ -17,6 +20,20 @@ public class PesquisaCandidato extends JFrame implements ActionListener {
     protected JButton pesquisar, voltar;
     protected JTable tabela;
     protected JScrollPane scroll;
+
+    protected static File bancoDados = new File("src\\banco_dados.txt");
+
+    protected static TableModel model_test;
+
+    static int counter2 = 0;
+
+    Object [][] dados =
+    {
+            {"Ana Monteiro", "48 9923-7898", "ana.monteiro@gmail.com"},
+            {"João da Silva", "48 8890-3345", "joaosilva@hotmail.com"},
+            {"Pedro Cascades", "48 9870-5634", "pedrinho@gmail.com"}
+    };
+
 
     PesquisaCandidato() {
         // Criando objeto imagem
@@ -115,6 +132,7 @@ public class PesquisaCandidato extends JFrame implements ActionListener {
         painelResultado.setLayout(null);
         painel.add(painelResultado);
 
+        //Scroll
         scroll = new JScrollPane();
         scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -122,7 +140,7 @@ public class PesquisaCandidato extends JFrame implements ActionListener {
         painelResultado.add(scroll);
         scroll.setViewportView(tabela);
 
-        // Tornando tudo visivel
+        // Tornando tudo visível
         this.setVisible(true);
         painel.setVisible(true);
         header.setVisible(true);
@@ -152,9 +170,104 @@ public class PesquisaCandidato extends JFrame implements ActionListener {
             city = cidade.getText();
             carrearArea = cursoArea.getText();
 
+            // Criando arquivo para armazenar os dados
 
+            try
+            {
+                if (bancoDados.createNewFile())
+                {
+                    System.out.println("Arquivo criado: " + bancoDados.getName());
+                }
+                else
+                {
+                    System.out.println("Arquivo ja existe.");
+                }
+            }
+            catch (IOException ev)
+            {
+                System.out.println("Um erro ocorreu.");
+                ev.printStackTrace();
+            }
 
-            //JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
+            // Escrevendo os dados das universidades.
+
+            try
+            {
+                OutputStream os = new FileOutputStream(bancoDados);
+                OutputStreamWriter osw = new OutputStreamWriter(os);
+                BufferedWriter bw = new BufferedWriter(osw);
+
+                for (int i = 0; i <CadastroCurso.aumentarNumCursos + 1; i++)
+                {
+                    bw.write(CadastroCurso.CursosArray.get(i).universidade.getEstado() + "," +
+                            CadastroCurso.CursosArray.get(i).universidade.getCidade() + "," +
+                            CadastroCurso.CursosArray.get(i).getNome() + "#" + "\n");
+
+                    bw.write(CadastroCurso.CursosArray.get(i).universidade.getEstado() + "," +
+                            CadastroCurso.CursosArray.get(i).universidade.getCidade() + "," +
+                            CadastroCurso.CursosArray.get(i).getArea() + "#" + "\n");
+                }
+
+                bw.close();
+
+                counter2++;
+
+                System.out.println("Arquivo escrito com sucesso.");
+            }
+            catch (IOException ev)
+            {
+                System.out.println("Um erro ocorreu.");
+                ev.printStackTrace();
+            }
+
+            //Criando um reader e evitando problemas adversos.
+
+            BufferedReader reader = null;
+            try
+            {
+                reader = new BufferedReader(new FileReader(bancoDados));
+            }
+            catch (FileNotFoundException ex)
+            {
+                ex.printStackTrace();
+            }
+
+            //Mecanismo de pesquisa através de um .txt criado
+
+            try {
+                assert reader != null;
+                String[] currentLine = new String[100];
+
+                int counter = 0;
+
+                System.out.println(bancoDados.length());
+
+                for (counter = 0; counter < counter2; counter++)
+                {
+                    currentLine[counter] = reader.readLine();
+                }
+
+                for (int i = 0; i < counter; i++)
+                {
+                    if (currentLine[i].equals(estado.getText() + "," + cidade.getText() + "," + cursoArea.getText() + "#"))
+                    {
+                        System.out.println("oi");
+                    }
+                    else
+                    {
+                        System.out.println("sem oi p vc");
+                    }
+                }
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            try {
+                reader.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+
         }
     }
 }

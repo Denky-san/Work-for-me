@@ -16,10 +16,6 @@ public class CadastroUniversidade extends JFrame implements ActionListener {
     protected JTextField nome, endereco, bairro, cidade, estado;
     protected JButton cadastrar, voltar;
 
-    protected static File bancoDados = new File("src\\banco_dados.txt");
-
-
-
     protected static ArrayList<Universidade> UniversidadesArr = new ArrayList<>();  //Criando uma ArrayList para armazenar as universidades
     protected static int aumentarNumUniver = -1; // Contador de quantidade de Universidades (começa em -1 para evitar problemas de IndexOutOfBoundsException)
 
@@ -152,44 +148,13 @@ public class CadastroUniversidade extends JFrame implements ActionListener {
 
             CadastroCurso.modelUniver.addElement(CadastroUniversidade.UniversidadesArr.get(aumentarNumUniver).getNome());
 
-            // Criando arquivo para armazenar os dados
 
-            try
-            {
-                if (bancoDados.createNewFile())
-                {
-                    System.out.println("Arquivo criado: " + bancoDados.getName());
-                }
-                else
-                {
-                    System.out.println("Arquivo ja existe.");
-                }
-            }
-            catch (IOException ev)
-            {
-                System.out.println("Um erro ocorreu.");
-                ev.printStackTrace();
-            }
 
-            // Escrevendo os dados das universidades.
 
-            try
-            {
-                OutputStream os = new FileOutputStream(bancoDados);
-                OutputStreamWriter osw = new OutputStreamWriter(os);
-                BufferedWriter bw = new BufferedWriter(osw);
 
-                FileWriter escreverArq = new FileWriter("src\\banco_dados.txt");
-                bw.write(UniversidadesArr.get(aumentarNumUniver).getEstado() + "," + UniversidadesArr.get(aumentarNumUniver).getCidade() + "\n");
-                bw.write(UniversidadesArr.get(aumentarNumUniver).getEstado() + "," +  UniversidadesArr.get(aumentarNumUniver).getCidade());
-                bw.close();
-                System.out.println("Arquivo escrito com sucesso.");
-            }
-            catch (IOException ev)
-            {
-                System.out.println("Um erro ocorreu.");
-                ev.printStackTrace();
-            }
+
+
+
 
             JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
         }
