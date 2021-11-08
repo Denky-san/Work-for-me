@@ -197,18 +197,21 @@ public class PesquisaCandidato extends JFrame implements ActionListener {
                 OutputStreamWriter osw = new OutputStreamWriter(os);
                 BufferedWriter bw = new BufferedWriter(osw);
 
+                Writer output;
+                output = new BufferedWriter(new FileWriter(bancoDados, true));
+
                 for (int i = 0; i < CadastroCurso.aumentarNumCursos + 1; i++)
                 {
-                    bw.write(CadastroCurso.CursosArray.get(i).universidade.getEstado() + "," +
+                    output.write(CadastroCurso.CursosArray.get(i).universidade.getEstado() + "," +
                             CadastroCurso.CursosArray.get(i).universidade.getCidade() + "," +
                             CadastroCurso.CursosArray.get(i).getNome() + "#" + "\n");
 
-                    bw.write(CadastroCurso.CursosArray.get(i).universidade.getEstado() + "," +
+                    output.write(CadastroCurso.CursosArray.get(i).universidade.getEstado() + "," +
                             CadastroCurso.CursosArray.get(i).universidade.getCidade() + "," +
                             CadastroCurso.CursosArray.get(i).getArea() + "#" + "\n");
                 }
 
-                bw.close();
+                output.close();
 
                 counter2++;
 
