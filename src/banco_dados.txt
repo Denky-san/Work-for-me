@@ -1,2 +1,0 @@
-Estado,Cidade,Nome222222#
-Estado,Cidade,Area#

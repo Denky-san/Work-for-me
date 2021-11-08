@@ -3,6 +3,7 @@ package com.company;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.xml.stream.events.EndDocument;
 import java.awt.*;
@@ -20,12 +21,10 @@ public class PesquisaCandidato extends JFrame implements ActionListener {
     protected JButton pesquisar, voltar;
     protected JTable tabela;
     protected JScrollPane scroll;
+    protected static DefaultTableModel model;
+    static int counter2 = 0;
 
     protected static File bancoDados = new File("src\\banco_dados.txt");
-
-    protected static TableModel model_test;
-
-    static int counter2 = 0;
 
     Object [][] dados =
     {
@@ -33,7 +32,6 @@ public class PesquisaCandidato extends JFrame implements ActionListener {
             {"João da Silva", "48 8890-3345", "joaosilva@hotmail.com"},
             {"Pedro Cascades", "48 9870-5634", "pedrinho@gmail.com"}
     };
-
 
     PesquisaCandidato() {
         // Criando objeto imagem
@@ -118,7 +116,12 @@ public class PesquisaCandidato extends JFrame implements ActionListener {
 
         // Tabela
         tabela = new JTable();
-        tabela.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        model = new DefaultTableModel();
+        Object[] coluna = {"Nome", "Matricula", "Data de Nascimento", "Ano de ingresso", "Situação", "Universidade", "Curso"};
+        Object[] fileira = new Object[0];
+        model.setColumnIdentifiers(coluna);
+        tabela.setModel(model);
+        //tabela.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tabela.setFont(new Font("Lucida Sans Unicode", Font.PLAIN, 11));
         tabela.setCellSelectionEnabled(true);
@@ -255,9 +258,6 @@ public class PesquisaCandidato extends JFrame implements ActionListener {
                     if (currentLine[i].equals(estado.getText() + "," + cidade.getText() + "," + cursoArea.getText() + "#"))
                     {
                         System.out.println("oi");
-
-
-                        //model_test.
                     }
                 }
 
