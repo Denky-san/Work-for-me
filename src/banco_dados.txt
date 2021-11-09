@@ -1,0 +1,6 @@
+Estado2,Cidade2,Nome2#
+
+Estado,Cidade,Nome#
+Estado,Cidade,Area#
+Estado2,Cidade2,Nome2#
+Estado2,Cidade2,Area2#

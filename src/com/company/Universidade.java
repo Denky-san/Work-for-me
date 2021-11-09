@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Universidade extends Pesquisa {
     String nome, endereco, bairro, cidade, estado;
 
-    public Universidade(String nome,String endereco, String bairro, String cidade, String estado) {
+    public Universidade(String nome, String endereco, String bairro, String cidade, String estado) {
         this.nome = nome;
         this.endereco = endereco;
         this.bairro = bairro;

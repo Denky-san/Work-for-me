@@ -16,10 +16,12 @@ public class CadastroAluno extends JFrame implements ActionListener {
     protected JButton cadastrar, voltar;
     protected JComboBox<String> listaFaculdades, listaCursos;
 
-    protected ArrayList<Alunos> AlunosArr = new ArrayList<>();
+    protected static ArrayList<Alunos> AlunosArr = new ArrayList<>();
 
     protected static Universidade uniDoAluno;
     protected static Cursos cursoDoAluno;
+
+    static int counterNumLinhas = 0;
 
     CadastroAluno() {
         // Criando objeto imagem
@@ -101,16 +103,13 @@ public class CadastroAluno extends JFrame implements ActionListener {
         listaFaculdades.setFont(new Font("Arial", Font.PLAIN, 20));
 
         /*
-            Adicionando TODOS os elementos (faculdades cadastradas) novamente ao modelo para exibir.
-            Para mais info ler CadastroUniversidade.java, linha 149
+         * Adicionando TODOS os elementos (faculdades cadastradas) novamente ao modelo
+         * para exibir. Para mais info ler CadastroUniversidade.java, linha 149
          */
 
-        if (CadastroUniversidade.aumentarNumUniver < 0)
-        {
+        if (CadastroUniversidade.aumentarNumUniver < 0) {
             CadastroCurso.modelUniver.addElement("Não cadastrado");
-        }
-        else
-        {
+        } else {
             CadastroCurso.modelUniver.removeElement("Não cadastrado");
         }
 
@@ -122,12 +121,9 @@ public class CadastroAluno extends JFrame implements ActionListener {
         listaCursos = new JComboBox<>();
         listaCursos.setFont(new Font("Arial", Font.PLAIN, 20));
 
-        if (CadastroCurso.aumentarNumCursos < 0)
-        {
+        if (CadastroCurso.aumentarNumCursos < 0) {
             CadastroCurso.modelCursos.addElement("Não cadastrado");
-        }
-        else
-        {
+        } else {
             CadastroCurso.modelCursos.removeElement("Não cadastrado");
         }
 
@@ -182,27 +178,27 @@ public class CadastroAluno extends JFrame implements ActionListener {
 
             String temp = (String) CadastroCurso.modelUniver.getSelectedItem();
 
-            for (int i = 0; i < CadastroUniversidade.aumentarNumUniver + 1; i++)
-            {
-                if (temp.equals(CadastroUniversidade.UniversidadesArr.get(i).getNome()))
-                {
+            for (int i = 0; i < CadastroUniversidade.aumentarNumUniver + 1; i++) {
+                if (temp.equals(CadastroUniversidade.UniversidadesArr.get(i).getNome())) {
                     uniDoAluno = CadastroUniversidade.UniversidadesArr.get(i);
                 }
             }
 
             String temp2 = (String) CadastroCurso.modelCursos.getSelectedItem();
 
-            for (int i = 0; i < CadastroCurso.aumentarNumCursos + 1; i++)
-            {
-                if(temp2.equals(CadastroCurso.CursosArray.get(i).getNome()))
-                {
+            for (int i = 0; i < CadastroCurso.aumentarNumCursos + 1; i++) {
+                if (temp2.equals(CadastroCurso.CursosArray.get(i).getNome())) {
                     cursoDoAluno = CadastroCurso.CursosArray.get(i);
                 }
             }
 
-            Alunos Alun = new Alunos(nome.getText(), matricula.getText(), dataNascimento.getText(), anoIngresso.getText(), situacao.getText(), uniDoAluno, cursoDoAluno);
+            Alunos Alun = new Alunos(nome.getText(), matricula.getText(), dataNascimento.getText(),
+                    anoIngresso.getText(), situacao.getText(), uniDoAluno, cursoDoAluno);
 
             AlunosArr.add(Alun);
+
+            counterNumLinhas++;
+            counterNumLinhas++;
 
             JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
         }

@@ -16,8 +16,10 @@ public class CadastroUniversidade extends JFrame implements ActionListener {
     protected JTextField nome, endereco, bairro, cidade, estado;
     protected JButton cadastrar, voltar;
 
-    protected static ArrayList<Universidade> UniversidadesArr = new ArrayList<>();  //Criando uma ArrayList para armazenar as universidades
-    protected static int aumentarNumUniver = -1; // Contador de quantidade de Universidades (começa em -1 para evitar problemas de IndexOutOfBoundsException)
+    protected static ArrayList<Universidade> UniversidadesArr = new ArrayList<>(); // Criando uma ArrayList para
+                                                                                   // armazenar as universidades
+    protected static int aumentarNumUniver = -1; // Contador de quantidade de Universidades (começa em -1 para evitar
+                                                 // problemas de IndexOutOfBoundsException)
 
     CadastroUniversidade() {
         // Criando objeto imagem
@@ -138,7 +140,8 @@ public class CadastroUniversidade extends JFrame implements ActionListener {
             TelaInicial.boundy = this.getY();
 
             // Criando uma universidade passando os devidos parâmetros.
-            Universidade Uni = new Universidade(nome.getText(), endereco.getText(), bairro.getText(), cidade.getText(), estado.getText());
+            Universidade Uni = new Universidade(nome.getText(), endereco.getText(), bairro.getText(), cidade.getText(),
+                    estado.getText());
 
             UniversidadesArr.add(Uni); // Adicionando a universidade criada para a ArrayList
 

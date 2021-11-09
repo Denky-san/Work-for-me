@@ -19,11 +19,13 @@ public class CadastroCurso extends JFrame implements ActionListener {
 
     protected static Universidade uniEscolhida;
 
-    protected static ArrayList<Cursos> CursosArray = new ArrayList<>();  //Criando uma ArrayList para armazenar as universidades
-    protected static int aumentarNumCursos = -1; // Contador de quantidade de Cursos (começa em -1 para evitar problemas de IndexOutOfBoundsException)
+    protected static ArrayList<Cursos> CursosArray = new ArrayList<>(); // Criando uma ArrayList para armazenar as
+                                                                        // universidades
+    protected static int aumentarNumCursos = -1; // Contador de quantidade de Cursos (começa em -1 para evitar problemas
+                                                 // de IndexOutOfBoundsException)
 
-
-    // Criando um modelo especifico do ComboBoxModel para não usar o default com ComboBoxModel com Strings inicializadas.
+    // Criando um modelo especifico do ComboBoxModel para não usar o default com
+    // ComboBoxModel com Strings inicializadas.
     protected static DefaultComboBoxModel modelUniver = new DefaultComboBoxModel();
 
     protected static DefaultComboBoxModel modelCursos = new DefaultComboBoxModel();
@@ -89,12 +91,9 @@ public class CadastroCurso extends JFrame implements ActionListener {
         listaFaculdades = new JComboBox<>();
         listaFaculdades.setFont(new Font("Arial", Font.PLAIN, 20));
 
-        if (CadastroUniversidade.aumentarNumUniver < 0)
-        {
+        if (CadastroUniversidade.aumentarNumUniver < 0) {
             modelUniver.addElement("Não cadastrado");
-        }
-        else
-        {
+        } else {
             modelUniver.removeElement("Não cadastrado");
         }
         listaFaculdades.setModel(modelUniver); // Só faltar settar aqui o modelo.
@@ -146,10 +145,8 @@ public class CadastroCurso extends JFrame implements ActionListener {
 
             System.out.println(temp);
 
-            for (int i = 0; i < CadastroUniversidade.aumentarNumUniver + 1; i++)
-            {
-                if (temp.equals(CadastroUniversidade.UniversidadesArr.get(i).getNome()))
-                {
+            for (int i = 0; i < CadastroUniversidade.aumentarNumUniver + 1; i++) {
+                if (temp.equals(CadastroUniversidade.UniversidadesArr.get(i).getNome())) {
                     uniEscolhida = CadastroUniversidade.UniversidadesArr.get(i);
                 }
             }

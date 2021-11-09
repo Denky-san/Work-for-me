@@ -10,6 +10,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.Objects;
 
 public class PesquisaCandidato extends JFrame implements ActionListener {
@@ -22,16 +26,15 @@ public class PesquisaCandidato extends JFrame implements ActionListener {
     protected JTable tabela;
     protected JScrollPane scroll;
     protected static DefaultTableModel model;
-    static int counter2 = 0;
+    // static int counter2 = 0;
+
+    protected static boolean jaLeu = false;
+
+    int counter3 = 0;
+    int counterErros = 0;
+    int counterAlunos = 0;
 
     protected static File bancoDados = new File("src\\banco_dados.txt");
-
-    Object [][] dados =
-    {
-            {"Ana Monteiro", "48 9923-7898", "ana.monteiro@gmail.com"},
-            {"João da Silva", "48 8890-3345", "joaosilva@hotmail.com"},
-            {"Pedro Cascades", "48 9870-5634", "pedrinho@gmail.com"}
-    };
 
     PesquisaCandidato() {
         // Criando objeto imagem
@@ -117,11 +120,12 @@ public class PesquisaCandidato extends JFrame implements ActionListener {
         // Tabela
         tabela = new JTable();
         model = new DefaultTableModel();
-        Object[] coluna = {"Nome", "Matricula", "Data de Nascimento", "Ano de ingresso", "Situação", "Universidade", "Curso"};
-        Object[] fileira = new Object[0];
+        Object[] coluna = { "Nome", "Matricula", "Data de Nascimento", "Ano de ingresso", "Situação", "Universidade",
+                "Curso" };
+        // Object[] fileira = new Object[0];
         model.setColumnIdentifiers(coluna);
         tabela.setModel(model);
-        //tabela.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        // tabela.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tabela.setFont(new Font("Lucida Sans Unicode", Font.PLAIN, 11));
         tabela.setCellSelectionEnabled(true);
@@ -135,7 +139,7 @@ public class PesquisaCandidato extends JFrame implements ActionListener {
         painelResultado.setLayout(null);
         painel.add(painelResultado);
 
-        //Scroll
+        // Scroll
         scroll = new JScrollPane();
         scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -175,70 +179,72 @@ public class PesquisaCandidato extends JFrame implements ActionListener {
 
             // Criando arquivo para armazenar os dados
 
-            try
-            {
-                if (bancoDados.createNewFile())
-                {
+
+            try {
+                boolean pedro;
+
+                if (!bancoDados.exists()) {
+                    pedro = bancoDados.createNewFile();
                     System.out.println("Arquivo criado: " + bancoDados.getName());
-                }
-                else
-                {
+                } else {
                     System.out.println("Arquivo ja existe.");
                 }
-            }
-            catch (IOException ev)
-            {
+            } catch (IOException ev) {
                 System.out.println("Um erro ocorreu.");
                 ev.printStackTrace();
             }
 
             // Escrevendo os dados das universidades.
 
-            try
-            {
-                OutputStream os = new FileOutputStream(bancoDados);
-                OutputStreamWriter osw = new OutputStreamWriter(os);
-                BufferedWriter bw = new BufferedWriter(osw);
+            try {
+               // OutputStream os = new FileOutputStream(bancoDados);
+               // OutputStreamWriter osw = new OutputStreamWriter(os);
+                //BufferedWriter bw = new BufferedWriter(osw);
 
-                Writer output;
-                output = new BufferedWriter(new FileWriter(bancoDados, true));
+                Path p = Paths.get("src\\banco_dados.txt");
+                String s = System.lineSeparator();
 
-                for (int i = 0; i < CadastroCurso.aumentarNumCursos + 1; i++)
-                {
-                    output.write(CadastroCurso.CursosArray.get(i).universidade.getEstado() + "," +
-                            CadastroCurso.CursosArray.get(i).universidade.getCidade() + "," +
-                            CadastroCurso.CursosArray.get(i).getNome() + "#" + "\n");
+                BufferedWriter writer = Files.newBufferedWriter(p, StandardOpenOption.APPEND);
 
-                    output.write(CadastroCurso.CursosArray.get(i).universidade.getEstado() + "," +
-                            CadastroCurso.CursosArray.get(i).universidade.getCidade() + "," +
-                            CadastroCurso.CursosArray.get(i).getArea() + "#" + "\n");
+                //Writer output;
+                //output = new BufferedWriter(new FileWriter(bancoDados, true));
+
+                for (int i = 0; i < CadastroAluno.AlunosArr.size(); i++) {
+
+                    writer.write(CadastroAluno.AlunosArr.get(i).universidadeDoAluno.getEstado() + ","
+                                   + CadastroAluno.AlunosArr.get(i).universidadeDoAluno.getCidade() + ","
+                                   + CadastroAluno.AlunosArr.get(i).cursoDoAluno.getNome() + "#" + "\n"
+                                   + CadastroAluno.AlunosArr.get(i).universidadeDoAluno.getEstado() + ","
+                                   + CadastroAluno.AlunosArr.get(i).universidadeDoAluno.getCidade() + ","
+                                   + CadastroAluno.AlunosArr.get(i).cursoDoAluno.getArea() + "#" + "\n");
+
+                    //output.write(CadastroAluno.AlunosArr.get(i).universidadeDoAluno.getEstado() + ","
+                    //        + CadastroAluno.AlunosArr.get(i).universidadeDoAluno.getCidade() + ","
+                     //       + CadastroAluno.AlunosArr.get(i).cursoDoAluno.getNome() + "#" + "\n");
+
+                    //output.write(CadastroAluno.AlunosArr.get(i).universidadeDoAluno.getEstado() + ","
+                    //        + CadastroAluno.AlunosArr.get(i).universidadeDoAluno.getCidade() + ","
+                     //       + CadastroAluno.AlunosArr.get(i).cursoDoAluno.getArea() + "#" + "\n");
                 }
 
-                output.close();
-
-                counter2++;
+                writer.close();
 
                 System.out.println("Arquivo escrito com sucesso.");
-            }
-            catch (IOException ev)
-            {
-                System.out.println("Um erro ocorreu.");
-                ev.printStackTrace();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
             }
 
-            //Criando um reader e evitando problemas adversos.
+            // Criando um reader e evitando problemas adversos.
 
             BufferedReader reader = null;
-            try
-            {
+
+            try {
                 reader = new BufferedReader(new FileReader(bancoDados));
-            }
-            catch (FileNotFoundException ex)
-            {
+            } catch (FileNotFoundException ex) {
                 ex.printStackTrace();
             }
 
-            //Mecanismo de pesquisa através de um .txt criado
+            // Mecanismo de pesquisa através de um .txt criado
 
             try {
                 assert reader != null;
@@ -246,19 +252,59 @@ public class PesquisaCandidato extends JFrame implements ActionListener {
 
                 int counter = 0;
 
-                System.out.println(bancoDados.length());
+                // System.out.println(bancoDados.length());
 
-                for (counter = 0; counter < counter2; counter++)
-                {
+                for (counter = 0; counter < CadastroAluno.counterNumLinhas; counter++) {
+
                     currentLine[counter] = reader.readLine();
+
+                    if (currentLine[counter] == null) {
+                        JOptionPane.showMessageDialog(null, "Não há dado para se pesquisar.");
+                        break;
+                    }
                 }
 
-                for (int i = 0; i < counter; i++)
-                {
-                    if (currentLine[i].equals(estado.getText() + "," + cidade.getText() + "," + cursoArea.getText() + "#"))
-                    {
+                final Object[] fileira = new Object[7];
+
+                System.out.println(CadastroAluno.counterNumLinhas);
+
+                counterErros = 0;
+
+                model.setRowCount(0);
+
+                for (int i = 0; i < CadastroAluno.counterNumLinhas; i++) {
+                    // if(currentLine[counter] == null)
+                    // break;
+
+                    System.out.println(currentLine[i]);
+                    System.out.println(CadastroAluno.counterNumLinhas);
+
+                    if (currentLine[i].equals(estado.getText() + "," + cidade.getText() + "," + cursoArea.getText() + "#")) {
                         System.out.println("oi");
+
+                        // Object[] coluna = { "Nome", "Matricula", "Data de Nascimento", "Ano de
+                        // ingresso", "Situação", "Universidade",
+                        // "Curso" };
+
+                        fileira[0] = (CadastroAluno.AlunosArr.get(i / 2).getNome());
+                        fileira[1] = (CadastroAluno.AlunosArr.get(i / 2).getMatricula());
+                        fileira[2] = (CadastroAluno.AlunosArr.get(i / 2).getDataNascimento());
+                        fileira[3] = (CadastroAluno.AlunosArr.get(i / 2).getAnoIngresso());
+                        fileira[4] = (CadastroAluno.AlunosArr.get(i / 2).getSituacao());
+                        fileira[5] = (CadastroAluno.AlunosArr.get(i / 2).universidadeDoAluno.getNome());
+                        fileira[6] = (CadastroAluno.AlunosArr.get(i / 2).cursoDoAluno.getNome());
+
+                        model.addRow(fileira);
+                        counter3++;
+
+                    } else {
+                        counterErros++;
                     }
+                }
+
+                if (counterErros == CadastroAluno.counterNumLinhas)
+                {
+                    JOptionPane.showMessageDialog(null, "Nenhum aluno encontrado com esses dados.");
                 }
 
             } catch (IOException ex) {
@@ -272,5 +318,5 @@ public class PesquisaCandidato extends JFrame implements ActionListener {
             }
 
         }
-    }
+        }
 }

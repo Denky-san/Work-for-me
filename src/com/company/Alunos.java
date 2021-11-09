@@ -6,7 +6,8 @@ public class Alunos extends Pesquisa {
     protected Universidade universidadeDoAluno;
     protected Cursos cursoDoAluno;
 
-    public Alunos(String nome, String matricula, String dataNascimento, String anoIngresso, String situacao, Universidade uni, Cursos curso) {
+    public Alunos(String nome, String matricula, String dataNascimento, String anoIngresso, String situacao,
+            Universidade uni, Cursos curso) {
         this.nome = nome;
         this.matricula = matricula;
         this.dataNascimento = dataNascimento;
