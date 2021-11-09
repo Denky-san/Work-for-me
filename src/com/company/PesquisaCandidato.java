@@ -197,17 +197,11 @@ public class PesquisaCandidato extends JFrame implements ActionListener {
             // Escrevendo os dados das universidades.
 
             try {
-               // OutputStream os = new FileOutputStream(bancoDados);
-               // OutputStreamWriter osw = new OutputStreamWriter(os);
-                //BufferedWriter bw = new BufferedWriter(osw);
 
                 Path p = Paths.get("src\\banco_dados.txt");
                 String s = System.lineSeparator();
 
                 BufferedWriter writer = Files.newBufferedWriter(p, StandardOpenOption.APPEND);
-
-                //Writer output;
-                //output = new BufferedWriter(new FileWriter(bancoDados, true));
 
                 for (int i = 0; i < CadastroAluno.AlunosArr.size(); i++) {
 
@@ -217,14 +211,6 @@ public class PesquisaCandidato extends JFrame implements ActionListener {
                                    + CadastroAluno.AlunosArr.get(i).universidadeDoAluno.getEstado() + ","
                                    + CadastroAluno.AlunosArr.get(i).universidadeDoAluno.getCidade() + ","
                                    + CadastroAluno.AlunosArr.get(i).cursoDoAluno.getArea() + "#" + "\n");
-
-                    //output.write(CadastroAluno.AlunosArr.get(i).universidadeDoAluno.getEstado() + ","
-                    //        + CadastroAluno.AlunosArr.get(i).universidadeDoAluno.getCidade() + ","
-                     //       + CadastroAluno.AlunosArr.get(i).cursoDoAluno.getNome() + "#" + "\n");
-
-                    //output.write(CadastroAluno.AlunosArr.get(i).universidadeDoAluno.getEstado() + ","
-                    //        + CadastroAluno.AlunosArr.get(i).universidadeDoAluno.getCidade() + ","
-                     //       + CadastroAluno.AlunosArr.get(i).cursoDoAluno.getArea() + "#" + "\n");
                 }
 
                 writer.close();
