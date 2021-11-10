@@ -1,6 +1,6 @@
 package com.company;
 
-public class Cursos extends Pesquisa {
+public class Cursos {
 
     protected String nome, sigla, area;
     protected Universidade universidade;
@@ -42,26 +42,6 @@ public class Cursos extends Pesquisa {
 
     public void setUniversidade(Universidade universidade) {
         this.universidade = universidade;
-    }
-
-    @Override
-    public void inclusao() {
-
-    }
-
-    @Override
-    public void alteracao() {
-
-    }
-
-    @Override
-    public void consulta() {
-
-    }
-
-    @Override
-    public void exclusao() {
-
     }
 
 }

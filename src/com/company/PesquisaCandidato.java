@@ -181,10 +181,10 @@ public class PesquisaCandidato extends JFrame implements ActionListener {
 
 
             try {
-                boolean pedro;
+                boolean useless;
 
                 if (!bancoDados.exists()) {
-                    pedro = bancoDados.createNewFile();
+                    useless = bancoDados.createNewFile();
                     System.out.println("Arquivo criado: " + bancoDados.getName());
                 } else {
                     System.out.println("Arquivo ja existe.");
@@ -199,7 +199,6 @@ public class PesquisaCandidato extends JFrame implements ActionListener {
             try {
 
                 Path p = Paths.get("src\\banco_dados.txt");
-                String s = System.lineSeparator();
 
                 BufferedWriter writer = Files.newBufferedWriter(p, StandardOpenOption.APPEND);
 
@@ -266,11 +265,6 @@ public class PesquisaCandidato extends JFrame implements ActionListener {
                     System.out.println(CadastroAluno.counterNumLinhas);
 
                     if (currentLine[i].equals(estado.getText() + "," + cidade.getText() + "," + cursoArea.getText() + "#")) {
-                        System.out.println("oi");
-
-                        // Object[] coluna = { "Nome", "Matricula", "Data de Nascimento", "Ano de
-                        // ingresso", "Situação", "Universidade",
-                        // "Curso" };
 
                         fileira[0] = (CadastroAluno.AlunosArr.get(i / 2).getNome());
                         fileira[1] = (CadastroAluno.AlunosArr.get(i / 2).getMatricula());

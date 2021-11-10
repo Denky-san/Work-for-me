@@ -1,6 +1,6 @@
 package com.company;
 
-public class Alunos extends Pesquisa {
+public class Alunos {
     protected String nome, matricula, dataNascimento, anoIngresso, situacao;
 
     protected Universidade universidadeDoAluno;
@@ -57,23 +57,4 @@ public class Alunos extends Pesquisa {
         this.situacao = situacao;
     }
 
-    @Override
-    public void inclusao() {
-
-    }
-
-    @Override
-    public void alteracao() {
-
-    }
-
-    @Override
-    public void consulta() {
-
-    }
-
-    @Override
-    public void exclusao() {
-
-    }
 }

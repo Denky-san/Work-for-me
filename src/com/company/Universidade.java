@@ -2,7 +2,7 @@ package com.company;
 
 import java.util.ArrayList;
 
-public class Universidade extends Pesquisa {
+public class Universidade  {
     String nome, endereco, bairro, cidade, estado;
 
     public Universidade(String nome, String endereco, String bairro, String cidade, String estado) {
@@ -53,23 +53,4 @@ public class Universidade extends Pesquisa {
         this.estado = estado;
     }
 
-    @Override
-    public void inclusao() {
-
-    }
-
-    @Override
-    public void alteracao() {
-
-    }
-
-    @Override
-    public void consulta() {
-
-    }
-
-    @Override
-    public void exclusao() {
-
-    }
 }
